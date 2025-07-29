@@ -9,6 +9,11 @@ async fn main() {
 
     let client = client_mutex.lock().unwrap();
 
+    let event_provider_mutex = client.event_provider();
+    let mut event_provider = event_provider_mutex.lock().unwrap();
+    //event_provider.subscribe("ServiceOnlineEvent", callback_online).await.unwrap();
+    event_provider.subscribe(callback_shutdown).await.unwrap();
+
     //groups
     let group_provider_mutex = client.group_provider();
     let mut group_provider = group_provider_mutex.lock().unwrap();
@@ -26,10 +31,6 @@ async fn main() {
 
     println!("All Services: {:?}", services);
 
-    let event_provider_mutex = client.event_provider();
-    let mut event_provider = event_provider_mutex.lock().unwrap();
-    //event_provider.subscribe("ServiceOnlineEvent", callback_online).await.unwrap();
-    event_provider.subscribe("ServiceShutdownEvent", callback_shutdown).await.unwrap();
 
     let mut s=String::new();
     let _ = stdin().read_line(&mut s);
