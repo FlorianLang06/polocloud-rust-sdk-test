@@ -5,4 +5,5 @@ edition = "2024"
 
 [dependencies]
 tokio = { version = "1.47.0", features = ["macros", "rt-multi-thread"] }
-polocloud-sdk = { git = "https://github.com/FlorianLang06/polocloud.git", branch = "rust-sdk" }
+#polocloud-sdk = { git = "https://github.com/FlorianLang06/polocloud.git", branch = "rust-sdk", version = "3.0.0-SNAPSHOT" }
+polocloud-sdk = { path = "../polocloud/sdk/sdk-rust"}

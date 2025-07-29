@@ -1,4 +1,6 @@
+use polocloud_sdk::events::ServiceOnlineEvent;
 use polocloud_sdk::Polocloud;
+use std::io::stdin;
 use tokio::main;
 
 #[main]
@@ -21,5 +23,18 @@ async fn main() {
     let service_provider_mutex = client.service_provider();
     let mut service_provider = service_provider_mutex.lock().unwrap();
     let services = service_provider.find_async().await.unwrap();
+
     println!("All Services: {:?}", services);
+
+    let event_provider_mutex = client.event_provider();
+    let mut event_provider = event_provider_mutex.lock().unwrap();
+    event_provider.subscribe("ServiceOnlineEvent", callback).await.unwrap();
+
+    let mut s=String::new();
+    let _ = stdin().read_line(&mut s);
 }
+
+fn callback(event: ServiceOnlineEvent) {
+    println!("{:?}", event);
+}
+

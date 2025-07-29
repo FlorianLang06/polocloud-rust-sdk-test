@@ -533,10 +533,8 @@ dependencies = [
 
 [[package]]
 name = "polocloud-sdk"
-version = "0.1.0"
-source = "git+https://github.com/FlorianLang06/polocloud.git?branch=rust-sdk#ca9bc5c6bf113a7766ca2f61c24bff83558e625f"
+version = "3.0.0-SNAPSHOT"
 dependencies = [
- "log",
  "prost",
  "serde",
  "serde_json",
